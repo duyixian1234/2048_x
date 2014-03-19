@@ -155,6 +155,7 @@ GameManager.prototype.move = function (direction) {
   });
 
   if (moved) {
+     if(time_tag)startclock();
     this.addRandomTile();
 
     if (!this.movesAvailable()) {

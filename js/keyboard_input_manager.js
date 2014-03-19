@@ -47,7 +47,6 @@ KeyboardInputManager.prototype.listen = function () {
       if (mapped !== undefined) {
         event.preventDefault();
         self.emit("move", mapped);
-        if(time_tag)startclock();
       }
 
       if (event.which === 32) self.restart.bind(self)(event);
