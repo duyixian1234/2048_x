@@ -16,6 +16,7 @@ function GameManager(size, InputManager, Actuator, ScoreManager) {
 // Restart the game
 GameManager.prototype.restart = function () {
   this.actuator.continue();
+  resetclock();
   this.setup();
 };
 
@@ -60,6 +61,7 @@ GameManager.prototype.addStartTiles = function () {
 GameManager.prototype.addRandomTile = function () {
   if (this.grid.cellsAvailable()) {
     var value = Math.random() < 0.9 ? 2 : 4;
+    //var value=16;
     var tile = new Tile(this.grid.randomAvailableCell(), value);
 
     this.grid.insertTile(tile);
@@ -104,7 +106,7 @@ GameManager.prototype.move = function (direction) {
   // 0: up, 1: right, 2:down, 3: left
   var self = this;
 
-  if (this.isGameTerminated()) return; // Don't do anything if the game's over
+  if (this.isGameTerminated()) {pauseclock();return}; // Don't do anything if the game's over
 
   var cell, tile;
 

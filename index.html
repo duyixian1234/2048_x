@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>2048</title>
+  <title>2048_TIMER</title>
 
   <link href="style/main.css" rel="stylesheet" type="text/css">
   <link rel="shortcut icon" href="favicon.ico">
@@ -20,9 +20,29 @@
       <div class="scores-container">
         <div class="score-container">0</div>
         <div class="best-container">0</div>
+        <div >
+          <input type="text" name="showtime" id="showtime" readonly=readonly
+         style="
+          width:130px;
+           display: inline-block;
+          position:relative;
+             background: #bbada0;
+             font-size: 25px;
+              font-weight: bold;
+              border-radius: 3px;
+             float: right;
+              text-align: center;
+               margin-top: 8px;
+            color: white;
+         "
+          value="00:00:00">
+        </div>
       </div>
     </div>
-    <p class="game-intro">Join the numbers and get to the <strong>2048 tile!</strong></p>
+    <p class="game-intro">
+    Join the numbers and get to the <strong>2048 tile!</strong>
+
+    </p>
 
     <div class="game-container">
       <div class="game-message">
@@ -70,14 +90,15 @@
     </p>
     <hr>
     <p>
-    <strong class="important">Note:</strong> This site is the official version of 2048. You can play it on your phone via <a href="http://git.io/2048">http://git.io/2048.</a> All other apps or sites are derivatives or fakes, and should be used with caution.
+    <strong class="important">Note:</strong> This site is the official version of 2048_timer. You can play it on your phone via <a href="http://git.io/2048">http://git.io/2048.</a> All other apps or sites are derivatives or fakes, and should be used with caution.
     </p>
     <hr>
     <p>
-    Created by <a href="http://gabrielecirulli.com" target="_blank">Gabriele Cirulli.</a> Based on <a href="https://itunes.apple.com/us/app/1024!/id823499224" target="_blank">1024 by Veewo Studio</a> and conceptually similar to <a href="http://asherv.com/threes/" target="_blank">Threes by Asher Vollmer.</a>
+    Based on <a href="http://gabrielecirulli.com" target="_blank">Gabriele Cirulli.</a> Based on <a href="https://itunes.apple.com/us/app/1024!/id823499224" target="_blank">1024 by Veewo Studio</a> and conceptually similar to <a href="http://asherv.com/threes/" target="_blank">Threes by Asher Vollmer.</a>
     </p>
   </div>
 
+  <script src="http://cdn.bootcss.com/jquery/1.10.2/jquery.min.js"></script>
   <script src="js/animframe_polyfill.js"></script>
   <script src="js/keyboard_input_manager.js"></script>
   <script src="js/html_actuator.js"></script>
@@ -86,5 +107,21 @@
   <script src="js/local_score_manager.js"></script>
   <script src="js/game_manager.js"></script>
   <script src="js/application.js"></script>
+  <script language="javascript">
+
+//定时器
+    var se, m = 0, h = 0, s = 0,time_tag=true;
+    function second() {
+        if (s > 0 && (s % 60) == 0) { m += 1; s = 0; }
+        if (m > 0 && (m % 60) == 0) { h += 1; m = 0; }
+        t = (h <= 9 ? "0" + h : h) + ":" + (m <= 9 ? "0" + m : m) + ":" + (s <= 9 ? "0" + s : s);
+        document.getElementById("showtime").value = t;
+        s += 1;
+    }
+    function startclock() { se = setInterval("second()", 1000); time_tag=false}
+    function pauseclock() { clearInterval(se); }
+    function resetclock() { m = h = s = 0; time_tag=true}
+</script>
+
 </body>
 </html>
